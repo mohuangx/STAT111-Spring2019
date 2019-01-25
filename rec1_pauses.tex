@@ -1,4 +1,4 @@
-\documentclass[10pt, handout, xcolor=table]{beamer}
+\documentclass[10pt, xcolor=table]{beamer}
 
 \usepackage[utf8]{inputenc}
 \usepackage{amsmath}
@@ -101,40 +101,40 @@ Slides: \url{github.com/mohuangx/STAT111-Spring2019} }
 
 \end{frame}
 
-\begin{frame}{Probability: Axioms}
-\pause
-\begin{itemize}
-  \setlength{\itemsep}{15pt}
-\item $0 \leq P(A) \leq 1$, where $A$ is any event.
-\item $P(A^C) = 1 - P(A)$ where $A^C$ is the complement of $A$.
-\item $P(A \cup B) = P(A) + P(B) - P(A \cap B)$
-\end{itemize}
-\begin{figure}
-\includegraphics[width = 0.9\textwidth]{"images/rec1_1"}
-\end{figure}
-\end{frame}
-
-\begin{frame}{Probability: Independence}
-\pause
-\begin{itemize}
-  \setlength{\itemsep}{15pt}
-\item $A$ and $B$ are independent if and only if $P(A \cap B) = P(A)P(B)$
-\item Conditional probability: $P(A|B) = \dfrac{P(A \cap B)}{P(B)}$
-\end{itemize}
-
-Suppose $A$ and $B$ are independent. Then
-\begin{align*}
-P(A|B) = \frac{P(A \cap B)}{P(B)} = \frac{P(A) P(B)}{P(B)} = P(A)
-\end{align*}
-
-So we have two definitions of independence:
-\begin{enumerate}
-\item $P(A \cap B) = P(A)P(B)$
-\item $P(A|B) = P(A)$
-\end{enumerate}
-
-\textbf{Note:} This year, conditional probability is not on the syllabus but it's still an interesting and useful concept!
-\end{frame}
+%\begin{frame}{Probability: Axioms}
+%\pause
+%\begin{itemize}
+%  \setlength{\itemsep}{15pt}
+%\item $0 \leq P(A) \leq 1$, where $A$ is any event.
+%\item $P(A^C) = 1 - P(A)$ where $A^C$ is the complement of $A$.
+%\item $P(A \cup B) = P(A) + P(B) - P(A \cap B)$
+%\end{itemize}
+%\begin{figure}
+%\includegraphics[width = 0.9\textwidth]{"images/rec1_1"}
+%\end{figure}
+%\end{frame}
+%
+%\begin{frame}{Probability: Independence}
+%\pause
+%\begin{itemize}
+%  \setlength{\itemsep}{15pt}
+%\item $A$ and $B$ are independent if and only if $P(A \cap B) = P(A)P(B)$
+%\item Conditional probability: $P(A|B) = \dfrac{P(A \cap B)}{P(B)}$
+%\end{itemize}
+%
+%Suppose $A$ and $B$ are independent. Then
+%\begin{align*}
+%P(A|B) = \frac{P(A \cap B)}{P(B)} = \frac{P(A) P(B)}{P(B)} = P(A)
+%\end{align*}
+%
+%So we have two definitions of independence:
+%\begin{enumerate}
+%\item $P(A \cap B) = P(A)P(B)$
+%\item $P(A|B) = P(A)$
+%\end{enumerate}
+%
+%\textbf{Note:} This year, conditional probability is not on the syllabus but it's still an interesting and useful concept!
+%\end{frame}
 
 \begin{frame}{Probability: Questions}
 \begin{itemize}
