@@ -1,0 +1,158 @@
+\documentclass[10pt, xcolor=table]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\newcommand*\themecol{\usebeamercolor[fg]{structure}}
+
+\setbeamertemplate{navigation symbols}{}
+ \setbeamertemplate{footline}[frame number]
+
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
+\tikzstyle{prob} = [rectangle, minimum width=3cm, text width = 4.5cm, minimum height=1cm, text centered, draw=black, fill= blue!20]
+\tikzstyle{stat} = [rectangle, minimum width=3cm,  text width = 4.5cm, minimum height=1cm, text centered, draw=black, fill= red!20]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\title{STAT 111\\
+{\small Recitation 3}}
+
+\author{Mo Huang}
+\institute{Email: mohuang@wharton.upenn.edu \\
+\vspace{0.25cm}
+Office Hours: Wednesdays 3:00 - 4:00 pm, JMHH F96\\
+\vspace{0.25cm}
+Slides: \url{github.com/mohuangx/STAT111-Spring2019} }
+
+
+\date{February 8, 2019}
+
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+
+\begin{frame}{Random Variables: Questions}
+\begin{itemize} 
+\item[Q1:] Let $X$ be a random variable with the below distribution. Find the mean and the variance of $X$ using formula (1) and then formula (2).
+\begin{table}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\rowcolor{blue!10} $x$ & -3 & -1 & 4&5  \\ \hline
+$P(X = x)$ & 0.1 & 0.3 & 0.4 &0.2 \\
+\hline
+\end{tabular}
+\caption{Probability distribution of $X$.} 
+\end{table}
+\item<2->[A1:]  {\color{red} $\mu = -3\times 0.1 -1\times 0.3 + 4\times 0.4 + 5\times 0.2 =2.$
+\begin{align*}
+\sigma^2&= (-3-2)^2(0.1) + (-1-2)^2(0.3) + (4-2)^2(0.4) + (5-2)^2(0.2) \\
+&= 8.6.\\
+  \\
+\sigma^2 &= (-3)^2(0.1) + (-1)^2(0.3) + 4^2(0.4) + 5^2(0.2) - 2^2\\
+&=8.6.
+\end{align*}}
+\end{itemize} 
+
+\end{frame}
+
+\begin{frame}{Random Variables: Questions}
+\begin{itemize} 
+\item[Q2:] Let $X$ be a random variable with the below distribution. Write the probability distribution of $Y = 2X$ in tableau form.
+\bigskip
+\begin{table}
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\rowcolor{blue!10} $x$ & -3 & -1 & 4&5  \\ \hline
+$P(X = x)$ & 0.1 & 0.3 & 0.4 &0.2 \\
+\hline
+\end{tabular}
+\caption{Probability distribution of $X$.} 
+\end{table}
+\item<2->[A2:]  {\color{red} Probability distribution of $Y$:}
+\bigskip
+\begin{table}[H]
+\begin{tabular}{|c|c|c|c|c|}
+\hline
+\rowcolor{blue!10} $y$ & -6 & -2 & 8 & 10  \\ \hline
+$P(Y = y)$ & 0.1 & 0.3 & 0.4 &0.2 \\
+\hline
+\end{tabular}
+\caption{Probability distribution of $Y$.} 
+\end{table}
+\end{itemize} 
+
+\end{frame}
+
+
+
+\begin{frame}{Questions}
+\begin{itemize}
+\setlength{\itemsep}{15pt}
+\item[Q4:] Suppose we have a company producing a medicine. Each day the \emph{mean} amount of medicine produced is 500 mg and the \emph{variance} is 900 mg$^2$. Assume the amount produced each day is independent.
+\item[(i)] Let $T_n$ be the total amount of medicine produced in a week. Find the mean and variance of $T_n$. 
+\item<2->[] {\color{red} $Mean(T_n) =   5\times 500 = 2500$}
+
+ {\color{red} $Var(T_n) = 5\times 900 = 4500$}
+\item<3->[(ii)] Let $\bar{X}$ be the average amount of medicine produced in a 5-day week. Find the mean and variance of $\bar{X}$.
+\item<4->[] {\color{red} $Mean(\bar{X}) = 500$} 
+
+{\color{red} $Var(\bar{X}) = 900/5 = 180$}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Questions}
+\begin{itemize}
+\setlength{\itemsep}{10pt}
+\item<1->[Q6:] Suppose the company producing a medicine has different means and variances the amount produced on each day of the week:
+\begin{table}
+\begin{tabular}{l|ll}
+Day & Mean & Variance \\ \hline
+Monday $(X_1)$ & 450 & 1200 \\
+Tuesday $(X_2)$ & 550 & 800 \\
+Wednesday $(X_3)$ & 600 & 500  \\
+Thursday $(X_4)$ & 550 & 800 \\
+Friday $(X_5)$ & 350 & 1200 
+\end{tabular}
+\end{table}
+\item<2->[] Find mean and variance of both the sum $T_n$ and the average $\bar{X}$.
+\item<3->[A6:] {\color{red} $X_1, X_2, X_3, X_4$, and $X_5$ are no longer $i.i.d.$!\\
+\bigskip
+$Mean(T_n) = 450 + 550 + 600 + 550 + 350 = 2500$
+
+$Var(T_n) = 1200 + 800 + 500 + 800 + 1200 = 4500$}
+\item<4->[] {\color{red} $Mean(\bar{X}) = 1/n \times Mean(T_n) = 500$ 
+
+$Var(\bar{X}) = 1/n^2 \times Var(T_n) = 4500/25 = 180$}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Questions}
+\begin{itemize}
+\setlength{\itemsep}{15pt}
+\item<1->[Q7:] Let $P_1$ be the proportion of heads in 50 coin tosses, where $P(H) = 0.6$. Find $Mean(P_1)$ and $Var(P_1)$.
+\item<2->[A7:] {\color{red} $Mean(P_1) = 0.6$ and $Var(P_1) = 0.6 \times 0.4/ 50 = 0.0048$.}
+\item<3->[Q8:] Let $P_2$ be the proportion of heads in 20 coin tosses, where $P(H) = 0.7$. From earlier, $Mean(P_2) = 0.7$ and $Var(P_2) = 0.0105$. Let $D = P_1 - P_2$. Find the mean and variance of $D$.
+\item<4->[A8:] {\color{red} $Mean(D) = 0.6 - 0.7 = -0.1$
+
+$Var(D) = 0.0048 + 0.0105 = 0.0153$}
+\end{itemize}
+\end{frame}
+
+
+
+\end{document}
+
+
