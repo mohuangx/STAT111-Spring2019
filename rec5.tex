@@ -1,0 +1,260 @@
+\documentclass[10pt, handout, xcolor=table]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\newcommand*\themecol{\usebeamercolor[fg]{structure}}
+
+\setbeamertemplate{navigation symbols}{}
+ \setbeamertemplate{footline}[frame number]
+
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
+\tikzstyle{prob} = [rectangle, minimum width=3cm, text width = 4.5cm, minimum height=1cm, text centered, draw=black, fill= blue!20]
+\tikzstyle{stat} = [rectangle, minimum width=3cm,  text width = 4.5cm, minimum height=1cm, text centered, draw=black, fill= red!20]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+\title{STAT 111\\
+{\small Recitation 5}}
+
+\author{Mo Huang}
+\institute{Email: mohuang@wharton.upenn.edu \\
+\vspace{0.25cm}
+Office Hours: Wednesdays 3:00 - 4:00 pm, JMHH F96\\
+\vspace{0.25cm}
+Slides: \url{github.com/mohuangx/STAT111-Spring2019} }
+
+
+\date{February 22, 2019}
+
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+\begin{frame}{Two-Standard-Deviation Rule}
+\begin{itemize}
+\setlength{\itemsep}{15pt}
+\item<1-> From the chart:
+$$P(Z < -1.96) = 0.025, \quad P(Z > 1.96) = 0.025.$$
+\item<2-> Then:
+$$P(-1.96 < Z < 1.96) = 0.95.$$
+\item<3-> Approximate $1.96 \approx 2$ and ``unstandardize":
+$$P\left( -2 < \frac{X-\mu}{\sigma} < 2\right) = 0.95$$
+\item<4->[$\Rightarrow$]  
+$$P(\mu - 2\sigma < X < \mu + 2\sigma) = 0.95.$$
+\item<5-> {\themecol The probability that a normal random variable is within 2 standard deviations of the mean is  $95\%$.} 
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Normal Distribution: Sums and Averages}
+\begin{itemize}
+\setlength{\itemsep}{15pt}
+\item<1-> Let $X_1, \dots, X_n$ be independent and \emph{normally distributed}. Let 
+$$T_n = X_1 + \cdots + X_n, \qquad \bar{X} = \frac{X_1 + \cdots X_n}{n}, \qquad D = X_2 - X_1.$$
+\item<2-> Then $T_n$, $\bar{X}$ and $D$ are {\themecol also normal random variables}.
+\item<3-> Let $X_1, \dots, X_n \stackrel{i.i.d}{\sim} N(\mu, \sigma^2)$. Then:
+\begin{align*}
+T_n &\sim N(n\mu, n\sigma^2)  \\[10pt]
+ \overline{X} &\sim N\left(\mu, \frac{\sigma^2}{n}\right) \\[10pt]
+D &\sim N(0, 2\sigma^2)
+\end{align*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Example}
+\begin{itemize}
+\item Suppose we know the weight $X$ of an adult man chosen at random is normally distributed with mean 160 pounds and variance 64 pounds$^2$. \\[10pt]
+\item[a)] Find $P(156 < X < 164)$.
+\item<2->[] {\color{red} 
+\vspace*{-0.25cm}
+\begin{align*}
+P(156 < X < 164) &= P\bigg(\frac{156-160}{8} < \frac{X - 160}{8} < \frac{164-160}{8}\bigg) \\
+&= P(-0.5 < Z < 0.5) \\
+&=  0.3830
+\end{align*}}
+\vspace*{-0.25cm}
+\item<3->[b)] Find the probability that the average weight of 16 men chosen at random is between 156 and 164 pounds.
+\vspace*{-0.25cm}
+\item<4->[] \color{red}
+\begin{align*}
+\overline{X} &\sim N(160, 64/16 = 4) \\
+P(156 < \overline{X} < 164) &= P(-2 < Z < 2)\\
+&\approx 0.95
+\end{align*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Example}
+\begin{itemize}
+\item Suppose we know the weight $X$ of an adult man chosen at random is normally distributed with mean 160 pounds and variance 64 pounds$^2$. \\[10pt]
+\item[c)] Calculate the numbers $A$ and $B$ such that $P(A < X < B) \approx 0.95$.
+\item<2->[] {\color{red} 
+\vspace*{-0.25cm}
+\begin{align*}
+&0.95 \approx P\bigg(-2 < \frac{X-\mu}{\sigma} < 2\bigg) = P(-2\sigma + \mu < X < 2\sigma + \mu) \\
+&A = -2(8) + 160 = 144,  \quad B = 2(8) + 160 = 176
+\end{align*}}
+\vspace*{-0.25cm}
+\item<3->[d)] Calculate the numbers $C$ and $D$ such that the average of 256 randomly chosen adults is between $C$ and $D$ with probability approximately 0.95.
+\item<4->[] {\color{red}
+\vspace*{-0.5cm}
+\begin{align*}
+&\overline{X}_{256} \sim N(160, 64/256 = 1/4) \\
+&C = -2\sigma + \mu = -2(1/2) + 160 = 159 \\
+&D = 2\sigma + \mu = 2(1/2) + 160 = 161
+\end{align*}}
+\vspace*{-0.25cm}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Central Limit Theorem}
+\begin{itemize}
+\setlength{\itemsep}{15pt}
+\item[] {\themecol The Central Limit Theorem:}
+\item Suppose $X_1, X_2, \dots, X_n$ are \emph{iid} with mean $\mu$ and variance $\sigma^2$. 
+\item Then, for large $n$
+\begin{align*}
+\themecol T_n \sim N(n\mu, n\sigma^2)\quad \text{and} \quad \bar{X} \sim N\left(\mu, \frac{\sigma^2}{n}\right)
+\end{align*}
+{\centering \emph{no matter the distribution of the individual} $X_i$}
+\item Allows approximation of all distributions using the normal distribution if you know the mean and variance.
+\item<2->[Note:] \small if $X_1, \dots, X_n$ are normally distributed, then this applies for \emph{all} $n$, not just large $n$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Central Limit Theorem: Example}
+\begin{itemize}
+\setlength{\itemsep}{15pt}
+\item<1-> Let $X_1, X_2,\dots, X_n \stackrel{iid}{\sim} Binomial(1, \theta)$.
+\item<2-> For each $X_i$, $Mean(X_i) = \theta$ and $Var(X_i) = \theta(1-\theta).$
+\item<3-> The sum is: $T_n = X_1 + X_2 + \cdots + X_n$.
+\item<4-> The proportion is:
+ $$P = \frac{X_1 + \cdots + X_n}{n}.$$
+\item<6-> For large $n$, 
+\begin{align*}
+T_n &\sim N\left(n\theta, n\theta[1-\theta]\right) \\[1.5 em]
+P &\sim N\left( \theta, \frac{\theta(1-\theta)}{n}\right)
+\end{align*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Central Limit Theorem: Problem}
+\begin{itemize}
+\item<1-> Suppose you are rolling a fair die 1000 times. Calculate the numbers $A$ and $B$ such that the average of the 1000 rolls is between $A$ and $B$ with probability approximately 0.95. You may assume the mean of one roll is 3.5 and the variance is 35/12.
+\item<2->[] {\color{red}
+\vspace*{-0.5cm}
+\begin{align*}
+&Mean(X_i) = 3.5, \quad Var(X_i) = 35/12 \\
+&\overline{X} \sim N\bigg(\mu, \frac{\sigma^2}{n}\bigg) = N\bigg(3.5, \frac{35}{12000} \bigg) \quad \text{by CLT}\\
+&A = -2\sigma + \mu = -2\sqrt{35/12000} + 3.5 \approx 3.392 \\
+&B = 2\sigma + \mu = 2\sqrt{35/12000} + 3.5 \approx 3.608
+\end{align*}}
+\vspace*{-0.25cm}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Statistics}
+\begin{itemize}\itemsep3ex
+\item<1-> We have finished the first half of the course on {\color{blue} probability}. Now, we move on to {\color{blue} statistics}.
+\item<2-> {\color{blue} Statistics} is used to make inductive statements about some phenomenon (coin-flipping, dice rolling) \textbf{after} observing data.
+\item<3-> Three main activities of statistics:
+\begin{enumerate}\itemsep1ex
+\item Estimating numerical values of a parameter or parameters.
+\item Assessing accuracy of these estimates.
+\item Testing hypotheses about the numerical values of parameters.
+\end{enumerate}
+\item<4-> Example: Suppose flip a coin 1,000 times and observe 700 heads.
+\begin{enumerate}\itemsep1ex
+\item How do I estimate the probability $\theta$ of achieving a head?
+\item How accurate is my estimate of $\theta$?
+\item Is this a fair coin ($\theta = 0.5$)?
+\end{enumerate}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Estimation of a parameter: Binomial parameter $\theta$}
+\begin{itemize}\itemsep3ex
+\item<1-> Recall a binomial random variable $X \sim Bin(n, \theta)$. How do we estimate the probability of success $\theta$?
+\item<2-> An intuitive estimator for $\theta$ is $\color{blue} p = x/n$, the \textbf{observed} proportion of successes.
+\item<3-> Consider the random variable $P$, the proportion of successes \textbf{prior} to performing the experiment. 
+\begin{itemize}
+\item<4-> $Mean(P) = \theta$ so $p$ is ``shooting at the right target". $p$ is then referred to as an \textbf{unbiased} estimate of $\theta$.
+\end{itemize}
+\item<5-> Difference between estimate and estimator:
+\begin{itemize}
+\item \textbf{Estimate:} A function of the observed data used to estimate a given parameter. Ex: $p$.
+\item \textbf{Estimator:} The random variable whose realization is the estimate. Ex: $P$.
+\end{itemize}
+\item<6-> To investigate the precision of an estimate, we need to consider the random variable estimator.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Precision of an estimate: Binomial parameter $\theta$}
+\begin{itemize}\itemsep3ex
+\item<1-> Precision of $p$ as an estimate of $\theta$ depends on the variance of random variable $P$.
+\item<2-> By the CLT, two standard deviation rule, and approximations (see pg. 40-41), we get the approximate {\color{blue} $95\%$ confidence interval} for $\theta$ as
+\[
+p \pm 2\sqrt{p(1-p)/n}
+\]
+\item<3-> We can further approximate the $95\%$ confidence interval with $p(1-p) \leq 1/4$ to get
+\begin{equation}
+p \pm \sqrt{1/n} \tag{66}
+\end{equation}
+\item<4-> Correspondingly, the $99\%$ confidence interval is
+\[
+p \pm 2.576\sqrt{p(1-p)/n} \approx p \pm 1.288\sqrt{1/n}
+\]
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Example}
+\begin{itemize}
+\setlength{\itemsep}{10pt}
+\item<1->[] In the 2017-2018 NBA season, Lebron James shot 531 free throws and made 388. We want to estimate the probability $\theta$ that Lebron James makes a free throw. 
+\item<2->[Q1:] What is the estimate for $\theta$?
+\item<3->[] {\color{red}
+\vspace*{-0.5cm}
+\[
+p = x/n = 388/531 = 0.7307
+\]
+}
+\vspace*{-0.5cm}
+\item<4->[Q2:] Calculate the $95\%$ confidence interval for $\theta$ using the approximate $95\%$ interval formula (66):
+\item<5->[] {\color{red}
+\vspace*{-0.5cm}
+\[
+p \pm \sqrt{1/n} = 0.7307 \pm \sqrt{1/531} = 0.7307 \pm 0.0434
+\]
+}
+\vspace*{-0.5cm}
+\item<6->[Q3:] What is the sample size if we want the width of the confidence interval to be 0.02?
+\item<7->[] {\color{red}
+\vspace*{-0.5cm}
+\begin{align*}
+\text{We want } \sqrt{1/n} &= 0.01 = 0.02/2.\\
+1/n &= 0.01^2\\
+n &= 1/0.01^2 = 10000
+\end{align*}
+}
+\vspace*{-0.5cm}
+\end{itemize}
+\end{frame}
+
+
+
+
+\end{document}
+
+
