@@ -1,0 +1,218 @@
+\documentclass[10pt, handout, xcolor=table]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\newcommand*\themecol{\usebeamercolor[fg]{structure}}
+
+\setbeamertemplate{navigation symbols}{}
+ \setbeamertemplate{footline}[frame number]
+
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
+\tikzstyle{prob} = [rectangle, minimum width=3cm, text width = 4.5cm, minimum height=1cm, text centered, draw=black, fill= blue!20]
+\tikzstyle{stat} = [rectangle, minimum width=3cm,  text width = 4.5cm, minimum height=1cm, text centered, draw=black, fill= red!20]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+
+\title{STAT 111\\
+{\small Recitation 6}}
+
+\author{Mo Huang}
+\institute{Email: mohuang@wharton.upenn.edu \\
+\vspace{0.25cm}
+Office Hours: Wednesdays 3:00 - 4:00 pm, JMHH F96\\
+\vspace{0.25cm}
+Slides: \url{github.com/mohuangx/STAT111-Spring2019} }
+
+
+\date{March 15, 2019}
+
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+
+\begin{frame}{Estimation of a binomial parameter $\theta$}
+\begin{itemize}\itemsep3ex
+\vspace*{8ex}
+\item Suppose $X_1, \ldots, X_n \overset{i.i.d.}{\sim} Bin(1, \theta)$, and you want to estimate $\theta$.
+\item The \textbf{estimate} for $\theta$ is {\themecol p = x/n}.
+\item The \textbf{estimator} is P.
+\item 95\% confidence interval is $p \pm \sqrt{1/n}$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Estimation of a mean $\mu$}
+\begin{itemize}\itemsep5ex
+\item Suppose we have i.i.d. random variables $X_1, \ldots, X_n$ with mean $\mu$ and variance $\sigma^2$. We do not assume any distribution! 
+\item We observe $x_1, \ldots, x_n$ and we want to estimate $\mu$. How do we do this?
+\item Recall by the Central Limit Theorem, for large $n$, $\overbar{X} \sim N\big(\mu, \frac{\sigma^2}{n}\big)$.
+\item Thus, {\themecol $\overbar{x}$} is an unbiased \textbf{estimate} for $\mu$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Estimation of a mean $\mu$}
+\begin{itemize}
+\setlength{\itemsep}{15pt}
+\item How precise an estimate is $\overbar{x}$?
+\item This is where the {\themecol variance} comes in:
+$$\overbar{X} \sim N\left( \mu, \frac{\sigma^2}{n}\right).$$
+\item We can use the {\themecol two-standard deviation} rule:
+$$\text{Prob}\left(\overbar{X} - 2\frac{\sigma}{\sqrt{n}} < \mu < \overbar{X} + 2\frac{\sigma}{\sqrt{n}}\right) = 0.95.$$
+\item Then our {\themecol 95\% confidence interval} for our data is:
+$$\overbar{x} \pm 2\frac{\sigma}{\sqrt{n}}.$$
+\item[Note:] $(1-\alpha)\%$ confidence interval is $\overbar{x} \pm z^*\frac{\sigma}{\sqrt{n}}$ where $z^*$ is the value in the $z$-chart where the probability is $1-\frac{\alpha}{2}$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Estimation of a mean $\mu$}
+\begin{itemize}
+\setlength{\itemsep}{10pt}
+\item What if we don't know the true variance $\sigma^2$?
+\item  We need to estimate the variance from the data.
+\item The unbiased estimate of $\sigma^2$ is {\themecol $s^2$}:
+$$s^2 = \frac{x_1^2  + x_2^2 + \cdots + x_n^2 - n(\overbar{x}^2)}{{\color{red} n-1}}.$$
+\item Then, our {\themecol approximate 95\% confidence interval} is:
+$$\overbar{x} - 2\frac{{\color{red}s}}{\sqrt{n}} \quad \text{to} \quad \overbar{x} + 2\frac{{\color{red}s}}{\sqrt{n}}.$$
+\vspace*{1.5ex}
+\item[Note:] {\small $95\%$ confidence intervals are always of the form:
+$$Estimator - 2 * SD(Estimator) \quad \text{to} \quad Estimator + 2 * SD(Estimator)$$}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Example}
+\begin{itemize}
+\setlength{\itemsep}{10pt}
+\item<1-> Suppose we observe 15 iid data points:
+ $$104, 127, 153, 164, 115, 143, 193, 151, 129, 139, 122, 144,108, 148, 132.$$
+ \item[Q:]<2-> Find the sample average of the data.
+ \item[A:]<3-> {\color{red} $\overbar{x} = (104 + 127 + \cdots + 132)/15 =  138.13$}
+ \item[Q:]<4-> Find the sample standard deviation of the data.
+ \item[A:]<5-> {\color{red} 
+ $$s^2 = \frac{104^2 + 127^2 + \cdots + 132^2 - 15 * 138.13^2}{15 - 1} \Rightarrow s = 22.89$$} 
+ \item[Q:]<6-> Find the 95\% confidence interval for the mean.
+ \item[A:]<7-> {\color{red}
+ $$138.13 - 2*\frac{22.89}{\sqrt{15}} \quad \text{to} \quad 138.13 + 2*\frac{22.89}{\sqrt{15}}  = [126.31, 149.95]$$}
+\end{itemize}
+\end{frame}
+
+
+\begin{frame}{Estimating the difference between proportions $\theta_1 - \theta_2$}
+\begin{itemize}
+\setlength{\itemsep}{10pt}
+\item Let Population 1 have proportion $P_1$ and sample size $n$, and Population 2, $P_2$ and $m$ respectively. Then for large $n,m$, we have 
+{\small $$P_1 \sim N\left(\theta_1, \frac{\theta_1(1-\theta_1)}{n}\right),\quad  P_2\sim N\left(\theta_2, \frac{\theta_2(1-\theta_2)}{m}\right) \quad (CLT)$$}
+\item Let $D = P_1 - P_2$. Then $D$ is normal with 
+{\small $$ D \sim N\bigg(\theta_1 - \theta_2,  \frac{\theta_1(1-\theta_1)}{n} +  \frac{\theta_2(1-\theta_2)}{m}\bigg).$$}
+\item The \textbf{estimate} for $\theta_1 - \theta_2$ is {\themecol $p_1 - p_2$}.
+\item The \textbf{95\% confidence interval} is then:
+\end{itemize}
+\vspace*{-1ex}
+\begin{align*}\themecol
+{p_1 - p_2 \pm  \sqrt{ \frac{1}{n} +  \frac{1}{m}}}
+\end{align*} 
+
+\end{frame}
+
+\begin{frame}{Example}
+\begin{itemize}
+\setlength{\itemsep}{10pt}
+\item Suppose we have two drugs to cure a headache, 1 and 2. Let $\theta_1$ be the probability that Drug 1 cures a headache and $\theta_2$ is the probability that Drug 2 cures a headache. 
+\item In a group of 250 people, Drug 1 cures 189 people. In a different group of 300 people, Drug 2 cures 256 people. 
+\item Find the 95\% confidence interval for the difference $\theta_1 - \theta_2$.
+\item[A:]<2->
+$$\color{red} p_1 - p_2 = \frac{189}{250}- \frac{256}{300} =  -0.0973, \quad \sqrt{\frac{1}{250} + \frac{1}{300}} = 0.0856$$
+\item[$\Rightarrow$]<3-> 95\% confidence interval:
+$$\color{red} -0.0973  \pm 0.0856 \Rightarrow [-0.1829, -0.0117].$$
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Estimating the difference between means $\mu_1 - \mu_2$}
+\begin{itemize}
+\setlength{\itemsep}{10pt}
+\item Suppose we have two independent populations:
+\begin{itemize}
+\vspace*{6pt}
+\setlength{\itemsep}{6pt}
+\item $X_{11}, X_{12},\dots, X_{1n}$: i.i.d. random variables with mean $\mu_1$ and variance $\sigma_1^2$ (both unknown), 
+\item $X_{21}, X_{22}, \dots, X_{2m}$: i.i.d. random variables with mean $\mu_2$ and variance $\sigma_2^2$ (both unknown).
+\end{itemize}
+\item By the CLT, {\small
+\[
+\overbar{X}_1 - \overbar{X}_2 \sim N\left(\mu_1 - \mu_2, \frac{\sigma_1^2}{n} + \frac{\sigma_2^2}{m}\right)
+\]
+}
+\item The \textbf{estimate} for $\mu_1 - \mu_2$ is {\themecol $\overbar{x}_1 - \overbar{x}_2$}.
+\item The \textbf{95\% confidence interval} is then
+\begin{align*}
+\overbar{x}_1 - \overbar{x}_2 \pm 2 \sqrt{\frac{s_1^2}{n} + \frac{s_2^2}{m}}
+\end{align*}
+{\footnotesize
+$$ \text{where } s_1^2 = \frac{x_{11}^2 + \cdots + x_{1n}^2 - n(\overbar{x}_1^2)}{n-1}, \quad s_2^2 = \frac{x_{21}^2 + \cdots + x_{2m}^2 - m(\overbar{x}_2^2)}{m-1}$$}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Example}
+\begin{itemize}
+\setlength{\itemsep}{15pt}
+\item Suppose we want to estimate the difference in yield of wheat from two different, independent fields, $A$ and $B$. 
+\item Data:
+
+\hspace{1cm}
+\begin{itemize}
+\setlength{\itemsep}{8pt}
+\item[Field A:] $n = 12, \overbar{x}_1 = 121.4, s_1^2 = 10.1$
+\item[Field B:] $m = 15, \overbar{x}_2 = 113.8, s_2^2 = 12.1$
+\end{itemize}
+\item Find the 95\% confidence interval for the difference in mean yield $(\mu_1 - \mu_2)$. 
+\item<2->[A:] {\color{red} 
+$$121.4 - 113.8 \pm 2 \sqrt{\frac{10.1}{12} + \frac{12.1}{15}} \Rightarrow [5.032, 10.168]$$
+} 
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Estimation Summary}
+\begin{itemize}\itemsep2ex
+\vspace*{2ex}
+\item Binomial parameter $\theta$:
+\begin{itemize}
+\item[] Estimate: $p$
+\item[] 95\% confidence interval: $p \pm \sqrt{1/n}$
+\end{itemize}
+\item Mean $\mu$:
+\begin{itemize}
+\item[] Estimate: $\overbar{x}$
+\item[] 95\% confidence interval: $\overbar{x} \pm 2\frac{s}{\sqrt{n}}$
+\end{itemize}
+\item Difference between proportions $\theta_1 - \theta_2$:
+\begin{itemize}
+\item[] Estimate: $p_1 - p_2$
+\item[] 95\% confidence interval: ${p_1 - p_2 \pm  \sqrt{ \frac{1}{n} +  \frac{1}{m}}}$
+\end{itemize}
+\item Difference between means $\mu_1 - \mu_2$:
+\begin{itemize}
+\item[] Estimate: $\overbar{x}_1 - \overbar{x}_2$
+\item[] 95\% confidence interval: $\overbar{x}_1 - \overbar{x}_2 \pm 2 \sqrt{\frac{s_1^2}{n} + \frac{s_2^2}{m}}$
+\end{itemize}
+\vspace*{1ex}
+{\footnotesize \item[Note:] $$s = \sqrt{\frac{x_1^2  + x_2^2 + \cdots + x_n^2 - n(\overbar{x}^2)}{{ n-1}}}.$$}
+\end{itemize}
+\end{frame}
+
+
+
+\end{document}
+
+
