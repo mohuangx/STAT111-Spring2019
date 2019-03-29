@@ -1,0 +1,203 @@
+\documentclass[10pt, xcolor=table]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\newcommand*\themecol{\usebeamercolor[fg]{structure}}
+
+\setbeamertemplate{navigation symbols}{}
+ \setbeamertemplate{footline}[frame number]
+
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
+\tikzstyle{prob} = [rectangle, minimum width=3cm, text width = 4.5cm, minimum height=1cm, text centered, draw=black, fill= blue!20]
+\tikzstyle{stat} = [rectangle, minimum width=3cm,  text width = 4.5cm, minimum height=1cm, text centered, draw=black, fill= red!20]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+
+\title{STAT 111\\
+{\small Recitation 8}}
+
+\author{Mo Huang}
+\institute{Email: mohuang@wharton.upenn.edu \\
+\vspace{0.25cm}
+Office Hours: Wednesdays 3:00 - 4:00 pm, JMHH F96\\
+\vspace{0.25cm}
+Slide: \url{github.com/mohuangx/STAT111-Spring2019} }
+
+
+\date{March 29, 2019}
+
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{Introduction to Hypothesis Testing}
+
+\begin{itemize}\itemsep3ex
+\item {\themecol Statistics} is {\em inductive} (or ``bottom-up logic''). We start with finite observations and then attempt to make objective statements about the world or \textbf{test hypotheses}. 
+\item For example: Is this coin fair? Is this medicine more effective?
+\item \textbf{Null hypothesis $(H_0)$:} A general statement indicating no significant difference or phenomenon.
+\begin{itemize}
+\item For example: This coin is fair. This medicine is equally as effective.
+\end{itemize}
+\item \textbf{Alternative hypothesis $(H_1)$:} The hypothesis used that is contrary to the null hypothesis.
+\begin{itemize}
+\item For example. This coin is unfair. This medicine is more effective.
+\end{itemize}
+\item \textbf{Basic premise of hypothesis testing:} Observe a random sample from a population. If the sample is consistent with $H_0$, do not reject $H_0$. If the sample is inconsistent or unlikely under $H_0$, then reject $H_0$ in favor of $H_1$.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Approach to hypothesis testing}
+
+\begin{enumerate}\itemsep4ex
+\item Define the null hypothesis $H_0$ and the alternative hypothesis $H_1$ in terms of parameters.
+\item Choose a type I error $\alpha$.
+\item Determine the test statistic.
+\item Calculate the critical region/p-value.
+\item Reject or not.
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}{1. Null and alternative hypotheses}
+
+\begin{itemize}\itemsep3ex
+\item Null hypotheses are most often single values. In the fair coin example, $H_0: \theta = 0.5$.
+\item Alternative hypotheses are typically ranges and can be {\themecol one-sided} or {\themecol two-sided}.
+\item For example:
+\begin{itemize}
+\item One-sided: The medicine cures more than 90\% of patients $(H_1: \theta > 0.9)$.
+\item Two-sided: The coin is unfair $(H_1: \theta \neq 0.5)$.
+\end{itemize}
+\item Whether the alternative is one-sided or two-sided affects the probability calculation.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{2. Choose a type I error $\alpha$}
+
+\begin{itemize}\itemsep3ex
+\item The type I error $\alpha$ is the probability of rejecting the null hypothesis when the null hypothesis is true. Can think of this as a mistaken rejection.
+\item The experimenter can set $\alpha$ depending on how willing they are to mistakenly reject $H_0$. Most common values are $0.01$ and $0.05$.
+\item For experiments where we want to be really sure we are not making a mistake, we would want $\alpha$ to be small.
+\item If $\alpha = 0.05$, this means that in roughly 5 out of every 100 repetitions of the experiment, we will mistakenly reject $H_0$.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{3. Determining the test statistic}
+
+\begin{itemize}\itemsep4ex
+\item The test statistic is a numerical function of the data we use to reject or accept the null hypothesis.
+\item Most often, it is the estimate of the parameter.
+\item For example, the test statistic for the fair coin flip example ($H_0: \theta = 0.5$) is the proportion of heads.
+\item We can also use the number of heads, which would involve a different probability calculation.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{4-5. Determining significance and rejection}
+
+\begin{itemize}
+\item Two equivalent approaches:
+\begin{enumerate}
+\item Determine critical region/point at level $\alpha$ and reject $H_0$ if test statistic falls inside critical region.
+\item Calculate p-value of the test statistic and reject $H_0$ if less than $\alpha$.
+\end{enumerate}
+\item Approach 1
+\begin{itemize}
+\item The \textbf{critical region} is calculated such that the probability the test statistic falls in the critical region is $\alpha$ if $H_0$ is true.
+\item One-sided: $P(X \geq A) = \alpha$ or $P(X \leq A) = \alpha$.
+\item[] Two-sided: $P(X \leq A) = P(X \geq B) = \alpha/2$.
+\item Reject $H_0$ if test statistic falls inside critical region.
+\end{itemize}
+\item Approach 2
+\begin{itemize}
+\item The \textbf{p-value} is the probability under $H_0$ of obtaining a result of more or equal extremeness than the observed test statistic.
+\item One-sided: p-value = $P(X \geq x)$ or $P(X \leq x)$.
+\item[] Two-sided: p-value = $2P(X \geq x)$ or $2P(X \leq x)$ depending on if $x$ is greater than or less than the mean.
+\item Reject $H_0$ if p-value is less than $\alpha$.
+\end{itemize}
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Example}
+\begin{itemize}
+\setlength{\itemsep}{5pt}
+\item I want to test the hypothesis a coin is unbiased. I observed 1,070 heads out of 2,000 tosses. Let $\theta$ be the probability of tossing a head. Using approach I, calculate the critical point(s) and decide whether to reject $H_0$ at $\alpha = 0.05$.
+\footnotesize
+\item<2->[Ans:] \color{red} $H_0: \theta = 0.5$ vs. $H_1: \theta \neq 0.5$. Two-sided test.
+\item<2->[] \color{red} Test-statistic: $X$ is the number of heads tossed. $x = 1070$.
+\item<2->[] \color{red} Under $H_0$, $\mu = n\theta = 2000(0.5) = 1000$ and $\sigma^2 = n\theta(1-\theta) = 500$.
+\item<2->[] \color{red} We want to find critical points $A$ and $B$ at $\alpha = 0.05$:
+\begin{align*}
+P(X \leq A) = 0.025 &\text{ and } P(X \geq B) = 0.025\\
+P\left(\frac{X - 1000}{\sqrt{500}} \leq \frac{A - 1000}{\sqrt{500}}\right) =0.025 &\text{ and } P\left(\frac{X - 1000}{\sqrt{500}} \geq \frac{B - 1000}{\sqrt{500}} \right)=0.025 \\
+P\bigg(Z \leq \frac{A - 1000}{\sqrt{500}}\bigg) = 0.025  &\text{ and } P\bigg(Z\geq \frac{B - 1000}{\sqrt{500}}\bigg) = 0.025\\
+\end{align*}
+\vspace*{-7ex}
+\item<2->[] \color{red} Looking at the z-chart for $z$ where the probabilities are 0.025 and 0.975, we see that
+\[
+\frac{A-1000}{\sqrt{500}} = -1.96 \text{ and } \frac{B - 1000}{\sqrt{500}} = 1.96
+\]
+\item<2->[] \color{red} Solving for $A$ and $B$, we get $A = 956$ and $B = 1,044$. Since 1,070 is in the critical region, we reject $H_0$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Example}
+\begin{itemize}
+\setlength{\itemsep}{5pt}
+\item I want to test the hypothesis a coin is unbiased. I observed 1,070 heads out of 2,000 tosses. Let $\theta$ be the probability of tossing a head. Calculate the p-value and decide whether to reject $H_0$ at $\alpha = 0.05$.
+\item<2->[Ans:] \color{red} $H_0: \theta = 0.5$ vs. $H_1: \theta \neq 0.5$. Two-sided test.
+\item<2->[] \color{red} Test-statistic: $X$ is the number of heads tossed. $x = 1070$.
+\item<2->[] \color{red} Under $H_0$, $\mu = n\theta = 2000(0.5) = 1000$ and $\sigma^2 = n\theta(1-\theta) = 500$.
+\item<2->[] \color{red} We calculate $p\text{-value} = 2P(X \geq 1070)$ since 1070 is greater than the mean.
+\vspace*{-1ex}
+\begin{align*}
+p\text{-value} = 2P(X \geq 1070) &= 2P\bigg(\frac{X-1000}{\sqrt{500}} \geq \frac{1070-1000}{\sqrt{500}}\bigg)\\
+&= 2P(Z \geq 3.13)\\
+&= 2(1-0.9991) \quad \text{from the z-chart}\\
+&= 0.0018
+\end{align*}
+\vspace*{-5ex}
+\item<2->[] \color{red} $p$-value $< 0.05$, so we reject $H_0$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Example}
+\begin{itemize}
+\setlength{\itemsep}{10pt}
+\item I want to test the hypothesis a coin is unbiased. I observed 1,070 heads out of 2,000 tosses. Let $\theta$ be the probability of tossing a head. How would the approach be different if we were looking at the \textit{proportion}?
+\item<2->[Ans:] \color{red} $H_0: \theta = 0.5$ vs. $H_1: \theta \neq 0.5$.
+\item<2->[] \color{red} Test-statistic: $P$ is the proportion of heads tossed. $p = 0.535$.
+\item<2->[] \color{red} Under $H_0$, $\mu = \theta = 0.5$ and $\sigma^2 = \frac{\theta(1-\theta)}{n} = \frac{1}{8000}$.
+\item<2->[] \color{red} Do the same as before...
+\end{itemize}
+\end{frame}
+
+
+
+\end{document}
+
+
