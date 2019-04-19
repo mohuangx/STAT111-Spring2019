@@ -1,0 +1,247 @@
+\documentclass[10pt, handout, xcolor=table]{beamer}
+
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{mathtools}
+\newcommand*\themecol{\usebeamercolor[fg]{structure}}
+
+\setbeamertemplate{navigation symbols}{}
+ \setbeamertemplate{footline}[frame number]
+
+\newcommand{\overbar}[1]{\mkern 1.5mu\overline{\mkern-1.5mu#1\mkern-1.5mu}\mkern 1.5mu}
+
+\usepackage{tikz}
+\usetikzlibrary{shapes.geometric, arrows}
+\tikzstyle{prob} = [rectangle, minimum width=3cm, text width = 4.5cm, minimum height=1cm, text centered, draw=black, fill= blue!20]
+\tikzstyle{stat} = [rectangle, minimum width=3cm,  text width = 4.5cm, minimum height=1cm, text centered, draw=black, fill= red!20]
+\tikzstyle{arrow} = [thick,->,>=stealth]
+
+\DeclarePairedDelimiter\abs{\lvert}{\rvert}%
+\DeclarePairedDelimiter\norm{\lVert}{\rVert}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+\DeclarePairedDelimiter\floor{\lfloor}{\rfloor}
+
+
+
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt}
+
+
+\title{STAT 111\\
+{\small Recitation 11}}
+
+\author{Mo Huang}
+\institute{Email: mohuang@wharton.upenn.edu \\
+\vspace{0.25cm}
+Office Hours: Wednesdays 3:00 - 4:00 pm, JMHH F96\\
+\vspace{0.25cm}
+Slides: \url{github.com/mohuangx/STAT111-Spring2019} }
+
+
+\date{April 19, 2019}
+
+
+\begin{document}
+
+\begin{frame}
+\titlepage
+\end{frame}
+
+\begin{frame}{Hypothesis testing outline}
+\begin{itemize}\itemsep5ex
+\item Test of binomial/proportion
+\item Test of means/regression
+\begin{itemize}
+\item One-sample $t$ test
+\item Two-sample $t$ test (unpaired)
+\item Paired two-sample $t$ test
+\item Regression $t$ test
+\end{itemize}
+\item Test of equality of two binomial parameters (two-by-two table)
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}{Regression $t$ test}
+\begin{itemize}\itemsep2ex
+\item {\themecol Linear Regression Model}: for the $i$th observation,
+\vspace{0.25cm}
+\begin{itemize}
+\setlength{\itemsep}{8pt}
+\item Mean of $Y_i$ = $\alpha + \beta x_i$, $\qquad\qquad$ Variance of $Y_i$ = $\sigma^2$.
+\end{itemize}
+\item[] 
+\begin{itemize}
+\item $\beta$ is estimated by $b = s_{xy}/s_{xx}$
+\item $\alpha$ is estimated by $a = \overbar{y} - b\overbar{x}$
+\item $\sigma^2$ is estimated by $s^2_r = \frac{s_{yy}-b^2s_{xx}}{n-2}$
+\end{itemize}
+\item We want to test $H_0: \beta = 0$ ($x$ has no effect on $Y$).
+\item The test statistic is
+{\themecol
+\[
+t = \frac{b}{s_r/\sqrt{s_{xx}}} \quad \text{with } n-2 \text{ degrees of freedom.}
+\]
+}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Example}
+\begin{itemize}
+\setlength{\itemsep}{8pt}
+\item We observe $\overline{x} = 21, \overline{y} =  79.7, s_{xx} = 80, s_{yy} = 83.54, s_{xy} = 25, n = 20$.
+\item<1->[Step 1] $H_0: \beta = 0$ vs. $H_1: \beta \neq 0$. Two-sided test.   
+\item<2->[Step 2] Choose $\alpha = 0.05$. 
+\item<3->[Step 3] Test-statistic is 
+\[
+t = \frac{b}{s_r/\sqrt{s_{xx}}}
+\]
+\item<4->[]
+\begin{align*}
+\only<4->{b &= \frac{s_{xy}}{s_{xx}} = \frac{25}{80} = 0.3125\\}
+\only<5->{s_r &= \sqrt{\frac{s_{yy}-b^2s_{xx}}{n-2}} = \sqrt{\frac{83.54-0.3125^2(80)}{20-2}} = 2.051\\}
+\only<6->{t &= \frac{b}{s_r/\sqrt{s_{xx}}} = \frac{0.3125}{2.051/\sqrt{80}} = 1.363}
+\end{align*}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Example}
+\begin{itemize}
+\setlength{\itemsep}{8pt}
+\item We observe $\overline{x} = 21, \overline{y} =  79.7, s_{xx} = 80, s_{yy} = 83.54, s_{xy} = 25, n = 20$.
+\item[Step 1] $H_0: \beta = 0$ vs. $H_1: \beta \neq 0$. Two-sided test.    
+\item[Step 2] Choose $\alpha = 0.05$. 
+\item[Step 3] Test-statistic is $t = 1.363$.
+\item[Step 4] Find the critical region.
+\item<2->[] How many degrees of freedom do we have? \only<3->{$n-2 = 18$}
+\item<4->[] So we need to look at $t_{18}$. What is the critical region?
+\item<5->[] $t \geq t_{18, 0.025} = 2.101$ and $t \leq -t_{18, 0.025} = -2.101$.
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Example}
+\begin{itemize}
+\setlength{\itemsep}{12pt}
+\item We observe $\overline{x} = 21, \overline{y} =  79.7, s_{xx} = 80, s_{yy} = 83.54, s_{xy} = 25, n = 20$.
+\item[Step 1] $H_0: \beta = 0$ vs. $H_1: \beta \neq 0$. Two-sided test.   
+\item[Step 2] Choose $\alpha = 0.05$. 
+\item[Step 3] Test-statistic is $t = 1.363$.
+\item[Step 4] Find the critical region: $t \geq 2.101$ and $t \leq -2.101$
+\item[Step 5] Do we reject $H_0$? \only<2->{No, $t = 1.363$ is not in the critical region.}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Testing for equality of two binomial parameters using two-by-two tables}
+\begin{itemize}\itemsep2ex
+\item Suppose we have two binomial parameters $\theta_1$ and $\theta_2$ and we want to test if they are equal.
+\item For example, we want to see if there is a difference in voter turnout between men and women. Let $\theta_1$ be the voter turnout for men and $\theta_2$ be the voter turnout for women. The two-by-two table would be
+\medskip
+{\footnotesize
+\begin{table}[]
+\begin{tabular}{|c|cc|c|}
+\hline
+      & voted & did not vote & total \\ \hline
+men   & $o_{11}$ & $o_{12}$        & $r_1$  \\ 
+women & $o_{21}$ & $o_{22}$        & $r_2$  \\ \hline
+total & $c_1$  & $c_2$         & $n$     \\ \hline
+\end{tabular}
+\end{table}
+}
+\item We want to test $H_0: \theta_1 = \theta_2$.
+\item The test statistic is
+{\themecol
+\[
+z = \frac{(o_{11} \times o_{22} - o_{21} \times o_{12})\sqrt{n}}{\sqrt{r_1 \times r_2 \times c_1 \times c_2}}
+\]
+}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Example}
+\begin{itemize}
+\setlength{\itemsep}{8pt}
+\item Suppose we have the following data on voter turnout:
+\medskip
+{\footnotesize
+\begin{table}[]
+\begin{tabular}{|c|cc|c|}
+\hline
+      & voted & did not vote & total \\ \hline
+men   & 170 & 140       & 310  \\ 
+women & 120 & 110        & 230  \\ \hline
+total & 290  & 250        & 540     \\ \hline
+\end{tabular}
+\end{table}
+}
+\item<1->[Step 1] $H_0: \theta_1 = \theta_2$ vs. $H_1: \theta_1 \neq \theta_2$. Two-sided test. 
+\item<2->[Step 2] Choose $\alpha = 0.05$. 
+\item<3->[Step 3] Test-statistic is 
+{\small
+\[
+z = \frac{(o_{11} \times o_{22} - o_{21} \times o_{12})\sqrt{n}}{\sqrt{r_1 \times r_2 \times c_1 \times c_2}}
+\]
+}
+\item<4->[]
+{\small
+\[
+z = \frac{(170 \times 110 - 120 \times 140)\sqrt{540}}{\sqrt{310 \times 230 \times 290 \times 250}} = 0.6141
+\]
+}
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Example}
+\begin{itemize}
+\setlength{\itemsep}{8pt}
+\item Suppose we have the following data on voter turnout:
+\medskip
+{\footnotesize
+\begin{table}[]
+\begin{tabular}{|c|cc|c|}
+\hline
+      & voted & did not vote & total \\ \hline
+men   & 170 & 140       & 310  \\ 
+women & 120 & 110        & 230  \\ \hline
+total & 290  & 250        & 540     \\ \hline
+\end{tabular}
+\end{table}
+}
+\item[Step 1] $H_0: \theta_1 = \theta_2$ vs. $H_1: \theta_1 \neq \theta_2$. Two-sided test. 
+\item[Step 2] Choose $\alpha = 0.05$. 
+\item[Step 3] Test-statistic is $z = 0.6141$.
+\item[Step 4] Find the critical region and p-value.
+\item<2->[] $ z \leq z_{0.025} = -1.96$ and $z \geq z_{0.975} = 1.96$.
+\item<3->[] $p\text{-value} = 2P(Z \geq \abs{0.6141}) \approx 2(0.27) = 0.54$
+\end{itemize}
+\end{frame}
+
+\begin{frame}{Example}
+\begin{itemize}
+\setlength{\itemsep}{12pt}
+\item Suppose we have the following data on voter turnout:
+\medskip
+{\footnotesize
+\begin{table}[]
+\begin{tabular}{|c|cc|c|}
+\hline
+      & voted & did not vote & total \\ \hline
+men   & 170 & 140       & 310  \\ 
+women & 120 & 110        & 230  \\ \hline
+total & 290  & 250        & 540     \\ \hline
+\end{tabular}
+\end{table}
+}
+\item[Step 1] $H_0: \theta_1 = \theta_2$ vs. $H_1: \theta_1 \neq \theta_2$. Two-sided test.      
+\item[Step 2] Choose $\alpha = 0.05$. 
+\item[Step 3] Test-statistic is $z = 0.6141$.
+\item[Step 4] Find the critical region $p$-value: $z \leq -1.96$ and $z \geq 1.96$. $p\text{-value} = 0.54$.
+\item[Step 5] Do we reject $H_0$? \only<2->{No, $z = 0.6141$ is not in the critical region and the $p$-value is greater than 0.05.}
+\end{itemize}
+\end{frame}
+
+
+\end{document}
+
+
