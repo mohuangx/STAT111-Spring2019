@@ -153,7 +153,7 @@ total & $c_1$  & $c_2$         & $n$     \\ \hline
 \item The test statistic is
 {\themecol
 \[
-z = \frac{(o_{11} \times o_{22} - o_{21} \times o_{12})\sqrt{n}}{\sqrt{r_1 \times r_2 \times c_1 \times c_2}}
+z = \frac{\frac{o_{11}}{r_1}-\frac{o_{21}}{r_2}}{\sqrt{\frac{(c_1/n)(c_2/n)}{r_1}+\frac{(c_1/n)(c_2/n)}{r_2}}}
 \]
 }
 \end{itemize}
@@ -180,13 +180,13 @@ total & 290  & 250        & 540     \\ \hline
 \item<3->[Step 3] Test-statistic is 
 {\small
 \[
-z = \frac{(o_{11} \times o_{22} - o_{21} \times o_{12})\sqrt{n}}{\sqrt{r_1 \times r_2 \times c_1 \times c_2}}
+z = \frac{\frac{o_{11}}{r_1}-\frac{o_{21}}{r_2}}{\sqrt{\frac{(c_1/n)(c_2/n)}{r_1}+\frac{(c_1/n)(c_2/n)}{r_2}}}
 \]
 }
 \item<4->[]
 {\small
 \[
-z = \frac{(170 \times 110 - 120 \times 140)\sqrt{540}}{\sqrt{310 \times 230 \times 290 \times 250}} = 0.6141
+z = \frac{\frac{170}{310}-\frac{120}{230}}{\sqrt{\frac{(290/540)(250/540)}{310}+\frac{(290/540)(250/540)}{230}}} = 0.6141
 \]
 }
 \end{itemize}
